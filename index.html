@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chew Shan Yong | Information Systems Specialist & Digital Creator</title>
+  <meta name="description" content="Portfolio of Chew Shan Yong - Bachelor of Information Systems (Honours) student at UTAR, specializing in PC Assembly, Hardware Diagnostics, OS Deployment, Web Development & High-Converting Multimedia Production.">
+  <meta name="keywords" content="Chew Shan Yong, UTAR, Information Systems, PC Assembly, IT Support, Web Development, Multimedia, Hardware Diagnostics, Ipoh, Malaysia, Topper Six">
+  <meta name="author" content="Chew Shan Yong">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cyan: '#38bdf8',
+              blue: '#6366f1',
+              purple: '#a855f7',
+              emerald: '#10b981',
+              dark: '#060913',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="antialiased min-h-screen relative selection:bg-cyan-500 selection:text-slate-950">
+
+  <!-- Interactive Starfield Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center space-x-3 group" onclick="sound.playClick()">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+            <span class="font-heading font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 text-lg">CSY</span>
+          </div>
+        </div>
+        <div>
+          <span class="font-heading font-bold text-lg text-white tracking-tight group-hover:text-cyan-400 transition-colors">Chew Shan Yong</span>
+          <span class="block text-xs font-mono text-cyan-400/80 -mt-1">UTAR • BIS Honours</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links (Live Lab Removed) -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
+        <a href="#about" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-all" data-i18n="nav_about">About</a>
+        <a href="#experience" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-all" data-i18n="nav_experience">Experience</a>
+        <a href="#skills" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-all" data-i18n="nav_skills">Skills</a>
+        <a href="#projects" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-all" data-i18n="nav_projects">Projects</a>
+        <a href="#education" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-all" data-i18n="nav_education">Education</a>
+        <a href="#contact" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-white/5 transition-all" data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="hidden lg:flex items-center space-x-3">
+        <select id="lang-select" onchange="setLanguage(this.value)" class="bg-slate-900/80 border border-slate-700/60 text-xs text-slate-300 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-cyan-400 cursor-pointer">
+          <option value="en">🇺🇸 EN</option>
+          <option value="zh">🇨🇳 中文</option>
+          <option value="ms">🇲🇾 BM</option>
+        </select>
+
+        <select id="theme-select" onchange="setTheme(this.value)" class="bg-slate-900/80 border border-slate-700/60 text-xs text-slate-300 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-cyan-400 cursor-pointer">
+          <option value="cyber">⚡ Cyber Dark</option>
+          <option value="emerald">🟢 Matrix Emerald</option>
+          <option value="sunset">🌸 Sunset Ruby</option>
+          <option value="light">☀️ Clean Light</option>
+        </select>
+
+        <button onclick="toggleSound()" title="Toggle Sound Effects" class="w-9 h-9 rounded-lg bg-slate-900/80 border border-slate-700/60 flex items-center justify-center hover:border-cyan-400 transition-colors">
+          <i id="sound-icon" class="fa-solid fa-volume-high text-cyan-400 text-xs"></i>
+        </button>
+
+        <button onclick="openResumeModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 shadow-md shadow-cyan-500/20 hover:scale-105 transition-all flex items-center space-x-2">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span data-i18n="btn_resume">Resume CV</span>
+        </button>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="flex items-center space-x-2 md:hidden">
+        <button onclick="openResumeModal()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950">
+          <i class="fa-solid fa-file-pdf mr-1"></i> CV
+        </button>
+        <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-200">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur-2xl px-6 py-5 space-y-4">
+      <div class="flex flex-col space-y-2">
+        <a href="#about" onclick="toggleMobileMenu()" class="px-3 py-2 text-sm text-slate-200 hover:text-cyan-400">About</a>
+        <a href="#experience" onclick="toggleMobileMenu()" class="px-3 py-2 text-sm text-slate-200 hover:text-cyan-400">Experience</a>
+        <a href="#skills" onclick="toggleMobileMenu()" class="px-3 py-2 text-sm text-slate-200 hover:text-cyan-400">Skills</a>
+        <a href="#projects" onclick="toggleMobileMenu()" class="px-3 py-2 text-sm text-slate-200 hover:text-cyan-400">Projects</a>
+        <a href="#education" onclick="toggleMobileMenu()" class="px-3 py-2 text-sm text-slate-200 hover:text-cyan-400">Education</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="px-3 py-2 text-sm text-slate-200 hover:text-cyan-400">Contact</a>
+      </div>
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+        <select onchange="setLanguage(this.value)" class="bg-slate-900 text-xs text-slate-300 rounded px-2 py-1">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+          <option value="ms">Melayu</option>
+        </select>
+        <select onchange="setTheme(this.value)" class="bg-slate-900 text-xs text-slate-300 rounded px-2 py-1">
+          <option value="cyber">Cyber Dark</option>
+          <option value="emerald">Emerald</option>
+          <option value="sunset">Sunset</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="min-h-[85vh] flex flex-col justify-center py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full gradient-badge text-xs font-medium text-cyan-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span data-i18n="status_available">Open for IT Systems, Web & Multimedia Roles</span>
+          </div>
+
+          <div class="space-y-3">
+            <span class="text-sm uppercase tracking-widest font-mono text-cyan-400 font-semibold" data-i18n="hero_badge">
+              Information Systems Specialist & Digital Creator
+            </span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-heading leading-tight tracking-tight">
+              <span class="text-white">Chew</span> <span class="gradient-text">Shan Yong</span>
+            </h1>
+            <p class="text-xl sm:text-2xl font-semibold text-slate-300 font-heading leading-snug" data-i18n="hero_title">
+              Bridging Hardware Infrastructure, Web Engineering & Digital Media
+            </p>
+          </div>
+
+          <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl" data-i18n="hero_subtitle">
+            Bachelor of Information Systems (Honours) student with proven mastery in PC assembly, hardware diagnostics, OS deployment, network setup, and high-converting multimedia web production.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#projects" onclick="sound.playClick()" class="px-6 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-slate-950 shadow-lg shadow-cyan-500/25 hover:scale-105 transition-all flex items-center space-x-2">
+              <i class="fa-solid fa-layer-group"></i>
+              <span data-i18n="btn_explore">Explore Featured Work</span>
+            </a>
+            
+            <button onclick="openResumeModal()" class="px-6 py-3.5 rounded-xl font-semibold text-sm glass-card text-white hover:text-cyan-400 hover:border-cyan-400/50 hover:scale-105 transition-all flex items-center space-x-2">
+              <i class="fa-solid fa-file-arrow-down text-cyan-400"></i>
+              <span data-i18n="btn_resume">View / Download CV</span>
+            </button>
+
+            <a href="https://wa.me/601110904013?text=Hi%20Chew%20Shan%20Yong,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" onclick="sound.playClick()" class="px-5 py-3.5 rounded-xl font-semibold text-sm bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:scale-105 transition-all flex items-center space-x-2">
+              <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+
+          <div class="pt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400">
+            <button onclick="copyText('shanyong10@gmail.com')" class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-slate-800 hover:border-cyan-400/50 hover:text-cyan-300 transition-all">
+              <i class="fa-solid fa-envelope text-cyan-400"></i>
+              <span>shanyong10@gmail.com</span>
+              <i class="fa-regular fa-copy text-[10px] ml-1 text-slate-500"></i>
+            </button>
+
+            <button onclick="copyText('011-10904013')" class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-slate-800 hover:border-cyan-400/50 hover:text-cyan-300 transition-all">
+              <i class="fa-solid fa-phone text-cyan-400"></i>
+              <span>+60 11-10904013</span>
+              <i class="fa-regular fa-copy text-[10px] ml-1 text-slate-500"></i>
+            </button>
+
+            <div class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-slate-800">
+              <i class="fa-solid fa-location-dot text-indigo-400"></i>
+              <span>Ipoh, Perak, Malaysia</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 3D Avatar Card -->
+        <div class="lg:col-span-5 flex justify-center relative">
+          <div class="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-indigo-500/20 to-purple-600/20 rounded-3xl blur-3xl -z-10 animate-pulse-glow"></div>
+
+          <div class="w-full max-w-sm glass-card rounded-3xl p-6 relative overflow-hidden border border-cyan-500/30">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-4">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                <span class="text-xs font-mono font-semibold text-slate-300">PROFILE DEPLOYED</span>
+              </div>
+              <div class="flex items-center space-x-1 bg-slate-950/80 rounded-lg p-1 border border-slate-800 text-xs">
+                <button id="btn-avatar-real" onclick="toggleAvatar('real')" class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-400/50 font-medium" data-i18n="avatar_toggle_real">Real Photo</button>
+                <button id="btn-avatar-pixel" onclick="toggleAvatar('pixel')" class="px-2.5 py-1 rounded text-slate-400 hover:text-white font-medium" data-i18n="avatar_toggle_pixel">Pixel Avatar</button>
+              </div>
+            </div>
+
+            <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center group">
+              <img id="avatar-real" src="assets/profile.jpg" alt="Chew Shan Yong Portrait" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <img id="avatar-pixel" src="assets/avatar_pixel.png" alt="Chew Shan Yong Pixel Avatar" class="hidden h-5/6 object-contain filter drop-shadow-2xl animate-float">
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent pointer-events-none opacity-40"></div>
+            </div>
+
+            <div class="mt-5 space-y-2 text-center">
+              <h3 class="font-heading font-bold text-lg text-white">Chew Shan Yong (周山勇)</h3>
+              <p class="text-xs font-mono text-cyan-400">Universiti Tunku Abdul Rahman (UTAR)</p>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Business Information Systems (Hons) • Hardware & Web Tech
+              </p>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-slate-800/80 grid grid-cols-2 gap-2 text-center font-mono">
+              <div class="p-2 rounded-xl bg-slate-950/60 border border-slate-800">
+                <span class="block text-cyan-400 font-bold text-sm">100+ PCs</span>
+                <span class="text-[10px] text-slate-400">Assembled & Tested</span>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-950/60 border border-slate-800">
+                <span class="block text-emerald-400 font-bold text-sm">MUET 4.0</span>
+                <span class="text-[10px] text-slate-400">English Proficiency</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT & PHILOSOPHY ==================== -->
+    <section id="about" class="py-20 border-t border-slate-800/80">
+      <div class="max-w-3xl mb-12">
+        <span class="px-3.5 py-1.5 rounded-full gradient-badge text-xs font-mono text-cyan-400 font-semibold" data-i18n="profile_badge">
+          Core Profile & Philosophy
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-4 tracking-tight" data-i18n="profile_heading">
+          Analytical Problem Solver with Hands-on Technical Mastery
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <div class="lg:col-span-8 space-y-6">
+          <div class="glass-card rounded-3xl p-8 space-y-4">
+            <p class="text-slate-300 leading-relaxed text-base sm:text-lg" data-i18n="profile_p1">
+              Motivated and proactive Information Systems student at Universiti Tunku Abdul Rahman (UTAR) with strong hands-on experience in bare-metal PC assembly, enterprise hardware diagnostics, and desktop troubleshooting.
+            </p>
+            <p class="text-slate-300 leading-relaxed text-base sm:text-lg" data-i18n="profile_p2">
+              Skilled in Windows & Linux OS deployment, software installation, driver optimization, static IP network configuration (LAN/Wi-Fi/Routers), and data backup/disaster recovery.
+            </p>
+            <p class="text-slate-300 leading-relaxed text-base sm:text-lg" data-i18n="profile_p3">
+              Proven customer service and communication abilities honed across tech support, digital marketing, and high-stakes service environments, effectively translating complex technical issues into clear solutions.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-cyan-400 space-y-3">
+              <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                <i class="fa-solid fa-server"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white">Hardware & IT Infrastructure</h3>
+              <p class="text-sm text-slate-400 leading-relaxed">
+                Expert in component-level PC builds from bare parts (CPU, GPU, RAM, PSU, Motherboard, Cable Management), diagnosing BSOD, thermal throttling, POST failures, and router/LAN network topologies.
+              </p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-purple-500 space-y-3">
+              <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400">
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white">Web & Multimedia Production</h3>
+              <p class="text-sm text-slate-400 leading-relaxed">
+                Crafting responsive brand websites, landing page conversion funnels, and high-impact commercial video advertisements tailored for social media, KOL outreach, and e-commerce platforms.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 space-y-6">
+          <div class="glass-card rounded-3xl p-6 space-y-5">
+            <h3 class="font-heading font-bold text-lg text-white flex items-center space-x-2">
+              <i class="fa-solid fa-language text-cyan-400"></i>
+              <span>Language Proficiency</span>
+            </h3>
+
+            <div class="space-y-4 font-mono text-xs">
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>English (MUET Band 4.0)</span>
+                  <span class="text-cyan-400">Advanced / Fluent</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-900 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 w-[90%]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>Chinese (Mandarin / Cantonese)</span>
+                  <span class="text-emerald-400">Native</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-900 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 w-[100%]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 mb-1">
+                  <span>Bahasa Melayu</span>
+                  <span class="text-purple-400">Professional Working</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-900 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 w-[85%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-3xl p-6 space-y-4">
+            <h3 class="font-heading font-bold text-lg text-white flex items-center space-x-2">
+              <i class="fa-solid fa-compass text-cyan-400"></i>
+              <span>Base & Logistics</span>
+            </h3>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-start space-x-2">
+                <i class="fa-solid fa-map-pin text-cyan-400 mt-0.5"></i>
+                <span>Ipoh, Perak, Malaysia (Flexible for Remote & Hybrid)</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                <span>Available for Full-Time, Contract, or Project Work</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i class="fa-solid fa-clock text-purple-400 mt-0.5"></i>
+                <span>Immediate Onboarding & Swift Adaptation</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== PROFESSIONAL EXPERIENCE ==================== -->
+    <section id="experience" class="py-20 border-t border-slate-800/80">
+      <div class="max-w-3xl mb-16">
+        <span class="px-3.5 py-1.5 rounded-full gradient-badge text-xs font-mono text-cyan-400 font-semibold" data-i18n="exp_badge">
+          Career Journey
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-4 tracking-tight" data-i18n="exp_heading">
+          Professional Work Experience
+        </h2>
+      </div>
+
+      <div class="space-y-8">
+
+        <!-- 1. Topper Six Sdn Bhd -->
+        <div class="glass-card rounded-3xl p-8 border-l-4 border-l-cyan-400 hover:border-l-cyan-300">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold">Web & Digital Media</span>
+              <h3 class="text-2xl font-bold font-heading text-white">Topper Six Sdn Bhd</h3>
+              <p class="text-sm font-medium text-slate-300">Web & Video Production Specialist</p>
+            </div>
+            <a href="https://toppersix.com.my/" target="_blank" class="px-3.5 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono border border-cyan-500/30 hover:bg-cyan-500/20 transition-all flex items-center space-x-1.5 w-fit">
+              <span>toppersix.com.my</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+
+          <ul class="space-y-2.5 text-slate-300 text-sm leading-relaxed mt-4">
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-cyan-400 mt-1 text-xs"></i>
+              <span>Developed, launched, and maintained the official responsive brand website (<a href="https://toppersix.com.my/" target="_blank" class="text-cyan-400 underline underline-offset-2 hover:text-cyan-300">toppersix.com.my</a>) to showcase premium furniture collections and boost direct customer inquiries & sales conversions.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-cyan-400 mt-1 text-xs"></i>
+              <span>Designed, filmed, and edited high-impact promotional video advertisements tailored for social media marketing and product showcases.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-cyan-400 mt-1 text-xs"></i>
+              <span>Created compelling visual brand assets, digital layouts, and marketing materials aligned with modern e-commerce standards.</span>
+            </li>
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-800/80">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-cyan-300 border border-slate-800">Web Development</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-cyan-300 border border-slate-800">Video Editing</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-cyan-300 border border-slate-800">E-Commerce UX</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-cyan-300 border border-slate-800">Brand Identity</span>
+          </div>
+        </div>
+
+        <!-- 2. Total Marketing Sdn Bhd -->
+        <div class="glass-card rounded-3xl p-8 border-l-4 border-l-purple-500 hover:border-l-purple-400">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-purple-400 font-semibold">Digital Marketing Agency</span>
+              <h3 class="text-2xl font-bold font-heading text-white">Total Marketing Sdn Bhd</h3>
+              <p class="text-sm font-medium text-slate-300">Digital Marketing & Multimedia Executive (Video Editor & Creator)</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-mono border border-purple-500/20 w-fit">
+              Campaigns & KOL Outreach
+            </span>
+          </div>
+
+          <ul class="space-y-2.5 text-slate-300 text-sm leading-relaxed mt-4">
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-purple-400 mt-1 text-xs"></i>
+              <span>Produced, edited, and reviewed high-converting video advertisements for multi-channel marketing campaigns.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-purple-400 mt-1 text-xs"></i>
+              <span>Sourced, negotiated, and coordinated outreach with Key Opinion Leaders (KOLs) and Key Opinion Consumers (KOCs).</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-purple-400 mt-1 text-xs"></i>
+              <span>Designed and built responsive promotional landing pages to support digital marketing lead generation.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-purple-400 mt-1 text-xs"></i>
+              <span>Collaborated on creative storyboarding and multimedia workflows to maximize brand retention and engagement.</span>
+            </li>
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-800/80">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-purple-300 border border-slate-800">KOL/KOC Outreach</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-purple-300 border border-slate-800">Landing Pages</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-purple-300 border border-slate-800">Storyboarding</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-purple-300 border border-slate-800">Multimedia Workflows</span>
+          </div>
+        </div>
+
+        <!-- 3. Independent Hardware & IT Support Specialist -->
+        <div class="glass-card rounded-3xl p-8 border-l-4 border-l-emerald-400 hover:border-l-emerald-300">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">Technical Infrastructure & Systems</span>
+              <h3 class="text-2xl font-bold font-heading text-white">Independent Hardware & IT Support Specialist</h3>
+              <p class="text-sm font-medium text-slate-300">Custom Workstation Builds, Hardware Diagnostics & Enterprise Support</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-mono border border-emerald-500/20 w-fit">
+              Hands-on Specialist
+            </span>
+          </div>
+
+          <ul class="space-y-2.5 text-slate-300 text-sm leading-relaxed mt-4">
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-xs"></i>
+              <span>Assembled custom desktop workstations from bare components (CPU, GPU, RAM, PSU, motherboard installation, and cable management).</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-xs"></i>
+              <span>Performed OS installations (Windows 10/11, Linux), UEFI boot drive creation, driver updates, and system optimization.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-xs"></i>
+              <span>Diagnosed and resolved complex hardware issues, including BSOD (Blue Screen of Death), POST failures, overheating, and faulty storage devices.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-xs"></i>
+              <span>Configured local home/office networks, router settings, static IPs, and printer/peripheral sharing.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-xs"></i>
+              <span>Provided technical assistance and troubleshooting to end-users for software crashes, malware removal, and file recovery.</span>
+            </li>
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-800/80">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-emerald-300 border border-slate-800">PC Assembly</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-emerald-300 border border-slate-800">BSOD Diagnostics</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-emerald-300 border border-slate-800">UEFI & Linux</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-emerald-300 border border-slate-800">Network & Static IP</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-emerald-300 border border-slate-800">Remote Support</span>
+          </div>
+        </div>
+
+        <!-- 4. Resorts World Genting -->
+        <div class="glass-card rounded-3xl p-8 border-l-4 border-l-amber-400 hover:border-l-amber-300">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">High-Precision Operations</span>
+              <h3 class="text-2xl font-bold font-heading text-white">Resorts World Genting</h3>
+              <p class="text-sm font-medium text-slate-300">Casino Dealer</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-mono border border-amber-500/20 w-fit">
+              Focus & Calculation
+            </span>
+          </div>
+
+          <ul class="space-y-2.5 text-slate-300 text-sm leading-relaxed mt-4">
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-amber-400 mt-1 text-xs"></i>
+              <span>Conducted table games professionally while strictly adhering to gaming compliance rules and security procedures.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-amber-400 mt-1 text-xs"></i>
+              <span>Managed chips, payouts, and cash transactions with high precision and zero discrepancies under high pressure.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-amber-400 mt-1 text-xs"></i>
+              <span>Demonstrated intense focus, rapid mental arithmetic, and sharp attention to detail in a dynamic international environment.</span>
+            </li>
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-800/80">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-amber-300 border border-slate-800">Rapid Mental Calculation</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-amber-300 border border-slate-800">Compliance & Security</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-amber-300 border border-slate-800">High-Stakes Focus</span>
+          </div>
+        </div>
+
+        <!-- 5. TUI BLUE The Haven Ipoh -->
+        <div class="glass-card rounded-3xl p-8 border-l-4 border-l-blue-400 hover:border-l-blue-300">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-blue-400 font-semibold">Premium Hospitality</span>
+              <h3 class="text-2xl font-bold font-heading text-white">TUI BLUE The Haven Ipoh</h3>
+              <p class="text-sm font-medium text-slate-300">Hotel Front Desk Executive</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-mono border border-blue-500/20 w-fit">
+              Client Relations
+            </span>
+          </div>
+
+          <ul class="space-y-2.5 text-slate-300 text-sm leading-relaxed mt-4">
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-blue-400 mt-1 text-xs"></i>
+              <span>Managed guest check-ins/check-outs, room reservations, and property management systems (PMS) efficiently.</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="fa-solid fa-circle-check text-blue-400 mt-1 text-xs"></i>
+              <span>Handled customer inquiries, conflict escalation, and special requests professionally with high customer satisfaction ratings.</span>
+            </li>
+          </ul>
+
+          <div class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-800/80">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-blue-300 border border-slate-800">Customer Conflict Resolution</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-blue-300 border border-slate-800">PMS & Booking Systems</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-[11px] font-mono text-blue-300 border border-slate-800">Interpersonal Communication</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SKILLS MATRIX ==================== -->
+    <section id="skills" class="py-20 border-t border-slate-800/80">
+      <div class="max-w-3xl mb-16">
+        <span class="px-3.5 py-1.5 rounded-full gradient-badge text-xs font-mono text-cyan-400 font-semibold" data-i18n="skills_badge">
+          Technical Stack
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-4 tracking-tight" data-i18n="skills_heading">
+          Core Competencies & Capabilities
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Category 1: Hardware & Diagnostics -->
+        <div class="glass-card rounded-3xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <h3 class="text-xl font-bold font-heading text-white">Hardware & Diagnostics</h3>
+          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-cyan-400 text-[10px]"></i><span>Bare-Metal PC Assembly</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-cyan-400 text-[10px]"></i><span>BSOD Bugcheck & Minidump Scan</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-cyan-400 text-[10px]"></i><span>POST Failure & RAM/GPU Debug</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-cyan-400 text-[10px]"></i><span>Thermal & Cable Routing</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-cyan-400 text-[10px]"></i><span>Storage SMART & Drive Recovery</span></li>
+          </ul>
+        </div>
+
+        <!-- Category 2: Web & Software Engineering -->
+        <div class="glass-card rounded-3xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xl">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <h3 class="text-xl font-bold font-heading text-white">Software & Web Dev</h3>
+          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-indigo-400 text-[10px]"></i><span>Python & Scripting</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-indigo-400 text-[10px]"></i><span>SQL & Relational Databases</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-indigo-400 text-[10px]"></i><span>HTML5, CSS3, Modern JavaScript</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-indigo-400 text-[10px]"></i><span>Responsive Web & UI/UX</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-indigo-400 text-[10px]"></i><span>Git & Version Control</span></li>
+          </ul>
+        </div>
+
+        <!-- Category 3: IT Infrastructure & OS -->
+        <div class="glass-card rounded-3xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl">
+            <i class="fa-solid fa-network-wired"></i>
+          </div>
+          <h3 class="text-xl font-bold font-heading text-white">Systems & Infrastructure</h3>
+          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-emerald-400 text-[10px]"></i><span>Windows 10/11 & Linux Deployment</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-emerald-400 text-[10px]"></i><span>Network (LAN/Wi-Fi/Routers/Subnet)</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-emerald-400 text-[10px]"></i><span>Remote Support (AnyDesk/TeamViewer)</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-emerald-400 text-[10px]"></i><span>Data Backup & Recovery Workflows</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-emerald-400 text-[10px]"></i><span>Malware Eradication & Security</span></li>
+          </ul>
+        </div>
+
+        <!-- Category 4: Multimedia & Video Marketing -->
+        <div class="glass-card rounded-3xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl">
+            <i class="fa-solid fa-film"></i>
+          </div>
+          <h3 class="text-xl font-bold font-heading text-white">Digital Media & Video</h3>
+          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-purple-400 text-[10px]"></i><span>High-Converting Video Ad Editing</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-purple-400 text-[10px]"></i><span>Visual Storyboarding & Motion</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-purple-400 text-[10px]"></i><span>KOL / Influencer Campaign Lead</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-purple-400 text-[10px]"></i><span>High-Conversion Landing Pages</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-purple-400 text-[10px]"></i><span>E-Commerce Asset Creation</span></li>
+          </ul>
+        </div>
+
+        <!-- Category 5: AI & Productivity Tools -->
+        <div class="glass-card rounded-3xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <h3 class="text-xl font-bold font-heading text-white">AI Tools & Productivity</h3>
+          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-amber-400 text-[10px]"></i><span>Generative AI (ChatGPT, Google Gemini)</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-amber-400 text-[10px]"></i><span>Prompt Engineering for Code & Media</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-amber-400 text-[10px]"></i><span>MS Excel (Formulas & Pivot Tables)</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-amber-400 text-[10px]"></i><span>MS Word & Professional Reporting</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-amber-400 text-[10px]"></i><span>MS PowerPoint Pitch Decks</span></li>
+          </ul>
+        </div>
+
+        <!-- Category 6: Operations & Communication -->
+        <div class="glass-card rounded-3xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 text-xl">
+            <i class="fa-solid fa-handshake-angle"></i>
+          </div>
+          <h3 class="text-xl font-bold font-heading text-white">Operations & Soft Skills</h3>
+          <ul class="space-y-2 text-xs text-slate-300 font-mono">
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-rose-400 text-[10px]"></i><span>Customer Service & End-User Care</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-rose-400 text-[10px]"></i><span>E-Commerce & Inventory Logistics</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-rose-400 text-[10px]"></i><span>Quick Mental Arithmetic & Focus</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-rose-400 text-[10px]"></i><span>High-Stakes Compliance Adherence</span></li>
+            <li class="flex items-center space-x-2"><i class="fa-solid fa-chevron-right text-rose-400 text-[10px]"></i><span>Trilingual Communication (EN/ZH/BM)</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== PROJECTS & PORTFOLIO SHOWCASE ==================== -->
+    <section id="projects" class="py-20 border-t border-slate-800/80">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div class="max-w-2xl">
+          <span class="px-3.5 py-1.5 rounded-full gradient-badge text-xs font-mono text-cyan-400 font-semibold" data-i18n="projects_badge">
+            Portfolio & Media
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-4 tracking-tight" data-i18n="projects_heading">
+            Featured Work & Multimedia Campaigns
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
+          <span class="px-4 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500 text-slate-950">Web & System Platforms</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Project 1: Topper Six Brand E-Commerce Platform -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden group border border-cyan-500/20 hover:border-cyan-400/50">
+          <div class="h-60 bg-slate-950 relative overflow-hidden flex items-center justify-center border-b border-slate-800 cursor-pointer" onclick="openLightbox('assets/projects/toppersix_showcase.jpg', 'Topper Six Official Brand Platform (toppersix.com.my)')">
+            <img src="assets/projects/toppersix_showcase.jpg" alt="Topper Six Furniture Platform" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+            
+            <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-xs font-mono text-cyan-300 border border-cyan-500/30 flex items-center space-x-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>LIVE PRODUCTION</span>
+            </div>
+
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+              <span class="text-xs font-mono text-white/90 bg-slate-900/80 backdrop-blur px-2.5 py-1 rounded-lg border border-slate-700">
+                <i class="fa-solid fa-globe text-cyan-400 mr-1.5"></i>toppersix.com.my
+              </span>
+              <span class="text-[11px] text-cyan-300 font-mono bg-black/70 px-2 py-1 rounded-md">
+                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Preview
+              </span>
+            </div>
+          </div>
+
+          <div class="p-7 space-y-4">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <span class="text-xs font-mono uppercase text-cyan-400 font-semibold block mb-1">E-Commerce & Digital Media</span>
+                <h3 class="text-2xl font-bold font-heading text-white group-hover:text-cyan-400 transition-colors">Topper Six Official Brand Platform</h3>
+              </div>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Developed, launched, and maintained the official brand platform for Topper Six Sdn Bhd to showcase furniture collections, integrate promotional multimedia video campaigns, and optimize inbound sales conversion funnels.
+            </p>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-cyan-300 border border-slate-800">Responsive Web UX</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-cyan-300 border border-slate-800">E-Commerce Showcase</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-cyan-300 border border-slate-800">Promotional Video Ads</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-cyan-300 border border-slate-800">Lead Conversion</span>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800/80">
+              <a href="https://toppersix.com.my/" target="_blank" onclick="sound.playClick()" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl font-semibold text-xs bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-all shadow-md shadow-cyan-500/20 hover:scale-105">
+                <span>Visit Live Website</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Web-Based Website Builder Platform (UTAR Capstone) -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden group border border-indigo-500/20 hover:border-indigo-400/50">
+          <div class="h-60 bg-gradient-to-tr from-slate-900 via-indigo-950 to-slate-900 relative overflow-hidden flex items-center justify-center p-6 border-b border-slate-800">
+            <div class="text-center space-y-3 z-10">
+              <div class="w-16 h-16 rounded-2xl bg-indigo-500/20 border border-indigo-400/40 flex items-center justify-center text-indigo-400 text-3xl mx-auto shadow-lg shadow-indigo-500/20">
+                <i class="fa-solid fa-cubes"></i>
+              </div>
+              <span class="text-xs font-mono text-cyan-400 block font-semibold">UTAR BIS Capstone Project</span>
+            </div>
+            <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+
+            <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-xs font-mono text-indigo-300 border border-indigo-500/30">
+              <span>RESEARCH & SYSTEM DESIGN</span>
+            </div>
+          </div>
+
+          <div class="p-7 space-y-4">
+            <div>
+              <span class="text-xs font-mono uppercase text-indigo-400 font-semibold block mb-1">Architecture & System Analysis</span>
+              <h3 class="text-2xl font-bold font-heading text-white group-hover:text-indigo-400 transition-colors">Web-Based Website Builder Platform</h3>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Research, system architecture, data flow diagrams (DFD), and UX prototyping for an intuitive drag-and-drop website builder platform designed to streamline digital onboarding for non-technical business enterprises.
+            </p>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-indigo-300 border border-slate-800">System Analysis</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-indigo-300 border border-slate-800">UML & Architecture</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-indigo-300 border border-slate-800">UI/UX Prototype</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-xs font-mono text-indigo-300 border border-slate-800">UTAR BIS (Hons)</span>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800/80">
+              <span class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl font-mono text-xs bg-slate-900 text-slate-300 border border-slate-800">
+                <i class="fa-solid fa-graduation-cap text-indigo-400"></i>
+                <span>Final Year Proposal • UTAR</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== EDUCATION ==================== -->
+    <section id="education" class="py-20 border-t border-slate-800/80">
+      <div class="max-w-3xl mb-16">
+        <span class="px-3.5 py-1.5 rounded-full gradient-badge text-xs font-mono text-cyan-400 font-semibold" data-i18n="edu_badge">
+          Academic Background
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-4 tracking-tight" data-i18n="edu_heading">
+          Education & Qualifications
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass-card rounded-3xl p-8 border-l-4 border-l-cyan-400 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 font-mono text-xs border border-cyan-500/20">2023 – Present</span>
+            <i class="fa-solid fa-graduation-cap text-cyan-400 text-xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold font-heading text-white">Universiti Tunku Abdul Rahman (UTAR)</h3>
+          <p class="text-sm font-semibold text-cyan-400">Bachelor of Information Systems (Hons) – Business Information Systems</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Core focus: Enterprise Systems Architecture, Database Management, System Analysis & Design, Business Intelligence, Python & Web Application Engineering.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 border-l-4 border-l-indigo-400 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 font-mono text-xs border border-indigo-500/20">2014 – 2018</span>
+            <i class="fa-solid fa-school text-indigo-400 text-xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold font-heading text-white">SMK Jalan Tasek</h3>
+          <p class="text-sm font-semibold text-indigo-400">Secondary Education (SPM)</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Foundation in mathematics, sciences, computer fundamentals, and trilingual communication skills.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT & DIRECT REACH ==================== -->
+    <section id="contact" class="py-20 border-t border-slate-800/80">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <div class="lg:col-span-5 space-y-6">
+          <span class="px-3.5 py-1.5 rounded-full gradient-badge text-xs font-mono text-cyan-400 font-semibold" data-i18n="contact_badge">
+            Let's Connect
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white tracking-tight" data-i18n="contact_heading">
+            Ready to Create Value Together
+          </h2>
+          <p class="text-slate-400 text-sm leading-relaxed" data-i18n="contact_desc">
+            Whether you need a dedicated IT systems engineer, full-stack web developer, or multimedia specialist, feel free to reach out directly via WhatsApp, Email, or the form below.
+          </p>
+
+          <div class="space-y-4 pt-4">
+            <div class="glass-card rounded-2xl p-4 flex items-center justify-between group">
+              <div class="flex items-center space-x-3.5">
+                <div class="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <span class="block text-[11px] font-mono text-slate-400">Direct Email</span>
+                  <span class="text-sm font-semibold text-white">shanyong10@gmail.com</span>
+                </div>
+              </div>
+              <button onclick="copyText('shanyong10@gmail.com')" class="px-3 py-1.5 rounded-lg bg-slate-900 text-xs text-cyan-400 border border-slate-800 hover:border-cyan-400/50 transition-all flex items-center space-x-1">
+                <i class="fa-regular fa-copy"></i>
+                <span>Copy</span>
+              </button>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 flex items-center justify-between group">
+              <div class="flex items-center space-x-3.5">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div>
+                  <span class="block text-[11px] font-mono text-slate-400">Phone / WhatsApp</span>
+                  <span class="text-sm font-semibold text-white">+60 11-10904013</span>
+                </div>
+              </div>
+              <a href="https://wa.me/601110904013?text=Hi%20Chew%20Shan%20Yong,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" onclick="sound.playClick()" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-xs text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all flex items-center space-x-1">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>Chat</span>
+              </a>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 flex items-center space-x-3.5">
+              <div class="w-11 h-11 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <span class="block text-[11px] font-mono text-slate-400">Location</span>
+                <span class="text-xs font-semibold text-slate-200">A-5-2, Lebuh Bercham Selatan, Bercham Prima Kondominium, 31400 Ipoh, Perak, Malaysia</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <form onsubmit="handleContactSubmit(event)" class="glass-card rounded-3xl p-8 space-y-6 border border-cyan-500/20">
+            <h3 class="text-2xl font-bold font-heading text-white">Send a Direct Message</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label class="text-xs font-mono text-slate-300">Your Name</label>
+                <input id="form-name" type="text" required placeholder="e.g. Alex Tan" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+              </div>
+              <div class="space-y-2">
+                <label class="text-xs font-mono text-slate-300">Your Email / WhatsApp</label>
+                <input id="form-email" type="text" required placeholder="e.g. alex@company.com" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400">
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label class="text-xs font-mono text-slate-300">Message / Opportunity Details</label>
+              <textarea id="form-message" rows="4" required placeholder="Hi Chew Shan Yong, we have an exciting project / opportunity..." class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400 resize-none"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-slate-950 shadow-lg shadow-cyan-500/25 hover:scale-[1.02] transition-all flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Send Message</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <span class="font-heading font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 text-xl">CSY</span>
+        <span class="text-xs text-slate-400 font-mono">© 2026 Chew Shan Yong • All Rights Reserved</span>
+      </div>
+
+      <div class="flex items-center space-x-6 text-xs text-slate-400">
+        <a href="#hero" class="hover:text-cyan-400 transition-colors">Back to Top ↑</a>
+        <button onclick="openResumeModal()" class="hover:text-cyan-400 transition-colors">Resume PDF</button>
+        <a href="https://wa.me/601110904013" target="_blank" class="hover:text-emerald-400 transition-colors">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toast" class="glass-card bg-slate-900/95 border border-cyan-400/50 rounded-2xl p-4 flex items-center space-x-3 shadow-2xl">
+    <div class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    <span id="toast-msg" class="text-sm font-medium text-white">Copied to clipboard!</span>
+  </div>
+
+  <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div id="lightbox-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="max-w-4xl max-h-[90vh] bg-slate-950 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl relative" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900/80 border border-slate-700 text-white flex items-center justify-center hover:bg-rose-500 transition-colors z-10">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightbox-img" src="" alt="Enlarged Project View" class="max-h-[75vh] w-auto mx-auto object-contain">
+      <div id="lightbox-caption" class="p-4 text-center font-mono text-xs text-cyan-300 bg-slate-900 border-t border-slate-800"></div>
+    </div>
+  </div>
+
+  <!-- ==================== RESUME CV PREVIEW MODAL ==================== -->
+  <div id="resume-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4" onclick="closeResumeModal()">
+    <div class="w-full max-w-4xl h-[90vh] bg-slate-900 rounded-3xl overflow-hidden border border-cyan-500/30 shadow-2xl flex flex-col relative" onclick="event.stopPropagation()">
+      <div class="p-4 px-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-file-pdf text-rose-500 text-lg"></i>
+          <div>
+            <span class="font-heading font-bold text-white text-sm block">Chew Shan Yong — Executive Resume</span>
+            <span class="text-[10px] font-mono text-cyan-400">PDF Document Preview & Download</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="assets/Chew_Shan_Yong_Resume.pdf" download="Chew_Shan_Yong_Resume.pdf" onclick="sound.playSuccess()" class="px-3.5 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs hover:bg-cyan-400 transition-colors flex items-center space-x-1.5">
+            <i class="fa-solid fa-download"></i>
+            <span>Download PDF</span>
+          </a>
+          <button onclick="closeResumeModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 bg-slate-950 relative">
+        <iframe src="assets/Chew_Shan_Yong_Resume.pdf" class="w-full h-full border-none"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
